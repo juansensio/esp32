@@ -29,7 +29,9 @@ Installing micropython on the ESP32:
 - Setup breadboard with esp32, buzzer, led, DRV8833 motor driver
 - buzzer sound and led toggles during boot, motor moves forward and backward
 
-[Video demonstration](docs/exp1.MOV)
+[![Animated preview of the ESP32 LED, buzzer, and motor test](docs/exp1-preview.gif)](docs/exp1.mp4)
+
+[Watch the demonstration with sound](docs/exp1.mp4) · [Original MOV](docs/exp1.MOV)
 
 ## Issues
 
