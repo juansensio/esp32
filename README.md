@@ -24,7 +24,7 @@ Installing micropython on the ESP32:
 
 ## Experiments
 
-- Bought car kit on amazon (chasis, mmotors and wheels)
+- Bought some parts on Amazon
 - Solder cables to the motors, solder pins to the DRV8833 motor driver
 - Check with multimeter
 - Setup breadboard with esp32, buzzer, led, DRV8833 motor driver
