@@ -1,7 +1,7 @@
 from machine import Pin, PWM
 from time import sleep
 
-PIN_IN1 = 1
+PIN_IN1 = 42
 PIN_IN2 = 2
 SPEED = 0.5
 
