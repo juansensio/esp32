@@ -18,17 +18,18 @@ Installing micropython on the ESP32:
 - Run `make cp` to copy the code to the ESP32
 - Run `make ls` to list the files on the ESP32
 
-After using the ESP-IDF C++ app, switch the board back to MicroPython before
-deploying these files. Disconnect the motor batteries, then run `make
-erase-flash`, `make write-flash`, and `make deploy` from this directory. Erasing
-flash removes the C++ app and any files stored on the board. Reconnect the motor
-batteries and press RST to test the boot sequence and motor motion.
-
-`make deploy` copies `src/`, `boot.py`, and `main.py` to the board. The Python
-sequence uses motor IN1 on GPIO1, IN2 on GPIO42, LED on GPIO21, and buzzer on
-GPIO41.
 
 > To run code on boot, use copy a `boot.py` file to the ESP32. `boot.py` is intended for early initialization: filesystem setup, Wi-Fi configuration, low-level hardware setup, etc. It should normally finish quickly. Then MicroPython automatically executes `main.py`.
+
+## Experiments
+
+- Boutgh 4WB kit on amazon (chasis, mmotors and wheels)
+- Solder cables to the motors, solder pins to the DRV8833 motor driver
+- Check with multimeter
+- Setup breadboard with esp32, buzzer, led, DRV8833 motor driver
+- buzzer sound and led toggles during boot, motor moves forward and backward
+
+[Video demonstration](docs/exp1.MOV)
 
 ## Issues
 
