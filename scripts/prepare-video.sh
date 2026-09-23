@@ -65,7 +65,7 @@ if (( ! force )) && [[ -e $mp4 || -e $preview ]]; then
 fi
 
 ffmpeg -y -hide_banner -loglevel error -i "$input" \
-  -map 0:v:0 -map 0:a:0? -map_metadata -1 \
+  -map 0:v:0 -map '0:a:0?' -map_metadata -1 \
   -vf 'scale=1280:1280:force_original_aspect_ratio=decrease:force_divisible_by=2,format=yuv420p' \
   -c:v libx264 -preset medium -crf 24 \
   -c:a aac -b:a 128k -movflags +faststart "$mp4"
@@ -77,6 +77,6 @@ ffmpeg -y -hide_banner -loglevel error -i "$input" \
 printf 'Created:\n  %s\n  %s\n\n' "$mp4" "$preview"
 if [[ $output_dir == "$repo_dir/docs" ]]; then
   printf 'Paste this into README.md:\n\n'
-  printf '[![Animated preview of %s](docs/%s-preview.gif)](docs/%s.mp4)\n\n' "$name" "$slug" "$slug"
+  printf '[![Animated preview of %s](docs/%s-preview.gif)](docs/%s.mp4)\n\n' "$slug" "$slug" "$slug"
   printf '[Watch with sound](docs/%s.mp4)\n' "$slug"
 fi

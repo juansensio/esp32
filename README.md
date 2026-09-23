@@ -32,7 +32,18 @@ Installing micropython on the ESP32:
 
 ![Animated preview of the ESP32 LED, buzzer, and motor test](docs/exp1-preview.gif)
 
-[Watch the demonstration with sound](docs/exp1.mp4) · [Original MOV](docs/exp1.MOV)
+[Watch the demonstration with sound](docs/exp1.mp4)
+
+To prepare another AirDropped iPhone video, run:
+
+```sh
+./scripts/prepare-video.sh "$HOME/Downloads/IMG_1234.MOV" demo-2
+```
+
+The script creates an MP4 with sound and an animated GIF in `docs/`, then
+prints the Markdown to paste into this README. It requires `ffmpeg` (`brew
+install ffmpeg`). Use `--force` before the filename to regenerate existing
+outputs.
 
 ## Issues
 
@@ -50,4 +61,3 @@ Installing micropython on the ESP32:
 
 - [https://docs.espressif.com/projects/esptool/en/latest/esp32s3/](https://docs.espressif.com/projects/esptool/en/latest/esp32s3/)
 - [https://micropython.org/download/ESP32_GENERIC_S3/](https://micropython.org/download/ESP32_GENERIC_S3/)
-
