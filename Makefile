@@ -26,7 +26,7 @@ dev:
 	uv run mpremote mount . run main.py
 
 deploy:
-	uv run mpremote cp src/*.py :
+	uv run mpremote cp -r src :
 	uv run mpremote cp boot.py :boot.py
 	uv run mpremote cp main.py :main.py
 	uv run mpremote reset

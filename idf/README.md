@@ -2,7 +2,8 @@
 
 This directory is a new ESP-IDF project. The MicroPython files in the parent
 directory remain available as a reference. The app sets both motor inputs low,
-then lights the LED and sounds the buzzer for one second during boot.
+then lights the LED and sounds the buzzer for one second during boot. After a
+pause, it runs a short forward and reverse motor test.
 
 
 
@@ -20,7 +21,7 @@ Install ESP-IDF for macOS using Espressif's installation guide and open an ESP-I
   ```
 2. Confirm the serial monitor prints:
   ```text
-   Stage 1 ready: motor inputs GPIO1 and GPIO2 are low
+   Motor inputs GPIO1 and GPIO42 are low
   ```
 3. Exit the monitor with Ctrl+T, then X (press them in sequence). Reconnect the motor supply and reset the board.
   The motor should remain still. If it twitches before the startup message,
@@ -33,8 +34,11 @@ The serial port shown above was present when this project was prepared. Run
 
 ## Stage 2: LED and buzzer at boot
 
-The current app uses GPIO20 for the LED and GPIO21 for the buzzer, matching the
-MicroPython `boot.py`. With the motor batteries removed, flash it again:
+The current app uses GPIO21 for the LED. Move the buzzer's signal wire from
+GPIO36 to GPIO41 before testing: GPIO36 is used by octal PSRAM on N16R8 boards.
+GPIO41 is on the accessible row, five pins toward the antenna from GPIO36
+(passing GPIO37, GPIO38, GPIO39, and GPIO40).
+With the motor batteries removed, flash it again:
 
 ```sh
 idf.py -p /dev/cu.usbmodem5C930007091 flash monitor
@@ -44,10 +48,25 @@ The LED should come on while the buzzer sounds at 2 kHz for one second, then
 both should turn off. The monitor should print `Boot complete; LED and buzzer
 off`. Exit with Ctrl+T, then X.
 
-GPIO20 is also the ESP32-S3's native USB D+ pin. This wiring is intended for
-the USB-to-serial port currently used for flashing. If you move to native USB,
-move the LED to another free GPIO and update `kLed` in `main/main.cpp`. The LED
-needs a series resistor, and the buzzer's other terminal must connect to ground.
+The LED needs a series resistor, and the buzzer's other terminal must connect
+to ground. Leave GPIO36 disconnected from the buzzer.
 
-Next stage: add motor PWM and direction changes after confirming the boot
-sequence works without a restart.
+## Stage 3: motor test
+
+The motor driver inputs are GPIO1 (IN1) and GPIO42 (IN2). The test uses 2 kHz
+PWM at 50% duty. After the LED and buzzer turn off, the motor stays stopped for
+two seconds, runs forward for one second, stops for one second, runs in reverse
+for one second, and stops.
+
+Flash with the motor batteries removed. Keep the monitor open, reconnect the
+motor batteries, then press the board's RST button to run the full sequence:
+
+```sh
+idf.py -p /dev/cu.usbmodem5C930007091 flash monitor
+```
+
+The monitor should print `Motor forward at 50%`, `Motor reverse at 50%`, and
+`Motor test complete; motor stopped` once per reset. If the first direction is
+opposite to what you expect, swap the motor's two output wires or the IN1/IN2
+assignments. If the LED and buzzer repeat during motor motion, check for a
+power-supply reset before continuing. Exit the monitor with Ctrl+T, then X.
