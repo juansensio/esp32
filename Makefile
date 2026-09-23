@@ -22,9 +22,14 @@ repl:
 run:
 	uv run mpremote run $(or $(word 2,$(MAKECMDGOALS)),main.py)
 
+dev:
+	uv run mpremote mount . run main.py
+
 deploy:
-# 	uv run mpremote cp boot.py :boot.py
+	uv run mpremote cp src/*.py :
+	uv run mpremote cp boot.py :boot.py
 	uv run mpremote cp main.py :main.py
+	uv run mpremote reset
 
 cp:
 	uv run mpremote cp $(or $(word 2,$(MAKECMDGOALS)),main.py) :$(or $(word 2,$(MAKECMDGOALS)),main.py)

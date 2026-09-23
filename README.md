@@ -23,6 +23,7 @@ Installing micropython on the ESP32:
 ## Issues
 
 - do not add an infite loop in `boot.py`, it runs before repl and will freeze the ESP32.
+- use `uv run mpremote mount . run main.py` to avoid having to manually copy the code to the ESP32 everytime you make a change.
 
 ## References
 

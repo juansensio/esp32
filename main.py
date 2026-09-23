@@ -1,19 +1,15 @@
 from machine import Pin
 import neopixel
 
-from src.rgb import flash_led
-from src.buzzer import buzz
+from src.motor import test, test2
 
-l = Pin(41, Pin.OUT)
-l.on()
+# test()
+test2()
 
-b = Pin(37, Pin.OUT)
-buzz(b)
+# led = neopixel.NeoPixel(Pin(48), 1)
 
-led = neopixel.NeoPixel(Pin(48), 1)
-
-while True:
-    try:
-        flash_led(led)
-    except KeyboardInterrupt:
-        break
+# while True:
+#     try:
+#         flash_led(led)
+#     except KeyboardInterrupt:
+#         break
