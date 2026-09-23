@@ -20,7 +20,10 @@ repl:
 	uv run mpremote repl
 
 run:
-	uv run mpremote run $(if $(file),$(file),main.py)
+	uv run mpremote run $(or $(word 2,$(MAKECMDGOALS)),main.py)
+
+%.py:
+	@:
 
 cp:
 	uv run mpremote cp main.py :main.py
