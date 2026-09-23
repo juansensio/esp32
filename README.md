@@ -18,6 +18,8 @@ Installing micropython on the ESP32:
 - Run `make cp` to copy the code to the ESP32
 - Run `make ls` to list the files on the ESP32
 
+> To run code on boot, use copy a `boot.py` file to the ESP32.
+
 ## References
 
 - https://docs.espressif.com/projects/esptool/en/latest/esp32s3/

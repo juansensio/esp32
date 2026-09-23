@@ -26,7 +26,7 @@ run:
 	@:
 
 cp:
-	uv run mpremote cp main.py :main.py
+	uv run mpremote cp boot.py :boot.py
 
 ls:
 	uv run mpremote ls
