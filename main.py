@@ -4,9 +4,11 @@ import neopixel
 from src.rgb import flash_led
 from src.buzzer import buzz
 
-l = Pin(37, Pin.OUT)
+l = Pin(41, Pin.OUT)
 l.on()
-buzz(l)
+
+b = Pin(37, Pin.OUT)
+buzz(b)
 
 led = neopixel.NeoPixel(Pin(48), 1)
 
