@@ -1,48 +1,24 @@
-The resulting physical architecture is exactly what I want to simulate:
+# ESP32
 
-```
-                     ┌──────────────────────┐
-                     │        Mac           │
-                     │ ROS 2 Jazzy          │
-                     │                      │
-                     │ SLAM / Nav2          │
-                     │ robot_state_pub      │
-                     │ odometry fusion      │
-                     └──────────┬───────────┘
-                                │
-                              Wi-Fi
-                                │
-                     ┌──────────▼───────────┐
-                     │     ESP32-S3         │
-                     │                      │
-               ┌─────┤ wheel PID           ├─────┐
-               │     │ encoder counting    │     │
-               │     │ IMU                 │     │
-               │     │ LiDAR bridge        │     │
-               │     └──────────────────────┘     │
-               ▼                                  ▼
-           MDD3A                              LD19
-          /     \
-     motor L   motor R
-        ↑         ↑
-    encoder    encoder
-```
+## Installation 
 
-And Gazebo will expose essentially the same interfaces:
+Installing micropython on the ESP32:
 
-```
-             SIMULATION              REAL
+- install `esptool` with `uv add esptool`
+- Erase the flash with `make erase-flash`
+- download the firmware from `https://micropython.org/download/ESP32_GENERIC_S3/`
+- Install micropython with `make write-flash`
+- Install `mpremote` with `uv add mpremote`
 
-/cmd_vel  → Gazebo drive        → ESP32 PID
-/odom     ← Gazebo encoders     ← real encoders
-/imu/data ← Gazebo IMU          ← MPU6050
-/scan     ← Gazebo LiDAR        ← LD19
+## Usage
 
-              ↓ same ↓
+- Connect the ESP32 to the computer
+- Run `make repl` to enter the REPL
+- Run `make run` to run the code
+- Run `make cp` to copy the code to the ESP32
+- Run `make ls` to list the files on the ESP32
 
-          SLAM Toolbox
-              +
-             Nav2
-```
+## References
 
-That gives us a very clean milestone: first make the virtual J0 map and navigate, then switch sim.launch.py → real.launch.py and progressively make the physical machine reproduce the same behavior.
+- https://docs.espressif.com/projects/esptool/en/latest/esp32s3/
+- https://micropython.org/download/ESP32_GENERIC_S3/
