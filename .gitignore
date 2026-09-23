@@ -1,2 +1,6 @@
 .venv
 __pycache__
+idf/build/
+idf/sdkconfig
+idf/sdkconfig.old
+idf/.cache/
